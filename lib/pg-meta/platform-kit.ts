@@ -6,6 +6,11 @@ export class SupabasePlatformKit {
 
   // Database Schema Operations
   async getTables(schema: string = "public"): Promise<PostgresTable[]> {
+    // Check if Supabase is properly configured
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_OR_ANON_KEY) {
+      return []
+    }
+    
     try {
       // Try the main function first
       const { data, error } = await this.supabase.rpc("get_schema_tables", {

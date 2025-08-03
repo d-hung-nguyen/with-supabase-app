@@ -10,6 +10,9 @@ import {
   TrendingUp,
 } from "lucide-react"
 
+// Force dynamic rendering to prevent static generation during build
+export const dynamic = 'force-dynamic'
+
 export default function CRUDDemoPage() {
   return (
     <div className="container mx-auto py-8 space-y-8">

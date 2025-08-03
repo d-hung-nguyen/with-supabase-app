@@ -1,5 +1,8 @@
 import { SupabasePlatformDashboard } from "@/components/platform-kit/dashboard"
 
+// Force dynamic rendering to prevent static generation during build
+export const dynamic = 'force-dynamic'
+
 export default function PlatformKitPage() {
   return (
     <div className="container mx-auto py-8">
