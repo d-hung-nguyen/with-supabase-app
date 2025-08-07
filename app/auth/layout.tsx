@@ -18,7 +18,7 @@ export default function ProtectedLayout({
 
       {/* Overlay for better text readability */}
       <div className="absolute inset-0 bg-black/40 " />
-      <main>{children}</main>
+      <div>{children}</div>
     </div>
   )
 }
