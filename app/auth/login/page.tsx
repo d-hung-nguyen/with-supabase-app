@@ -1,13 +1,20 @@
 import { LoginForm } from "@/components/login-form"
+import Image from "next/image"
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
-        <div className="glass-card">
-          <LoginForm />
-        </div>
-      </div>
+    <div className="min-h-screen items-center m-auto flex justify-center relative overflow-hidden">
+      <LoginForm />
+      <Image
+        src="/images/l3.jpg"
+        alt="Platform Kit Logo"
+        fill
+        quality={100}
+        priority
+        className="object-top object-cover  -z-10"
+      />
+
+      <div className="absolute inset-0 bg-black/30 -z-10" />
     </div>
   )
 }
