@@ -1,11 +1,14 @@
-import type { Metadata } from "next"
-import { Geist } from "next/font/google"
-import { ThemeProvider } from "next-themes"
-import Link from "next/link"
-import { EnvVarWarning } from "@/components/env-var-warning"
 import { AuthButton } from "@/components/auth-button"
+import { EnvVarWarning } from "@/components/env-var-warning"
+import { ThemeSwitcher } from "@/components/theme-switcher"
+import { Providers } from "@/components/providers"
 import { hasEnvVars } from "@/lib/utils"
+import type { Metadata } from "next"
+import { ThemeProvider } from "next-themes"
+import { Geist } from "next/font/google"
 import "./globals.css"
+import LeafyGreenNav from "@/components/leafygreen-nav"
+import AtlasSidebar from "@/components/atlas-sidebar"
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -13,8 +16,9 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "Platform Kit - Next.js Supabase CRUD Demo",
+  description:
+    "Auto-generated CRUD interfaces for any database table with Platform Kit",
 }
 
 const geistSans = Geist({
@@ -37,32 +41,61 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-            <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-              <div className="flex gap-5 items-center font-semibold">
-                <Link href={"/"}>Incentive Program Platform</Link>
-                <div className="flex items-center gap-4 text-sm font-normal">
-                  <Link href={"/platform-kit"} className="hover:underline">
-                    Platform Kit
-                  </Link>
-                  <Link href={"/crud-demo"} className="hover:underline">
-                    CRUD Demo
-                  </Link>
-                  <Link href={"/crud-comparison"} className="hover:underline">
-                    CRUD Comparison
-                  </Link>
-                  <Link href={"/test-platform"} className="hover:underline">
-                    Test Platform
-                  </Link>
-                  <Link href={"/protected"} className="hover:underline">
-                    Protected
-                  </Link>
-                </div>
+          <Providers>
+            <div className="min-h-screen bg-background">
+              {/* Top Navigation */}
+              <div className="fixed top-4 right-4 z-50">
+                <ThemeSwitcher />
               </div>
-              {!hasEnvVars ? <EnvVarWarning /> : <AuthButton />}
+
+              <LeafyGreenNav
+                projectName="Platform Kit Demo"
+                tabs={[
+                  { name: "Home", href: "/", active: true },
+                  {
+                    name: "Platform Kit",
+                    href: "/platform-kit",
+                    active: false,
+                  },
+                  { name: "CRUD Demo", href: "/crud-demo", active: false },
+                  {
+                    name: "Before vs After",
+                    href: "/crud-comparison",
+                    active: false,
+                  },
+                  {
+                    name: "Test Platform",
+                    href: "/test-platform",
+                    active: false,
+                  },
+                ]}
+              />
+
+              {/* Main Content Area */}
+              <div className="flex">
+                {/* Sidebar */}
+                <AtlasSidebar activeItem="Dashboard" />
+
+                {/* Page Content */}
+                <main className="flex-1 p-6 ml-64">{children}</main>
+              </div>
             </div>
-          </nav>
-          {children}
+
+            <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16 ml-64">
+              <p>
+                Powered by{" "}
+                <a
+                  href="//staynergie.com"
+                  target="_blank"
+                  className="font-bold hover:underline"
+                  rel="noreferrer"
+                >
+                  Staynergie
+                </a>
+              </p>
+              {!hasEnvVars ? <EnvVarWarning /> : <AuthButton />}
+            </footer>
+          </Providers>
         </ThemeProvider>
       </body>
     </html>

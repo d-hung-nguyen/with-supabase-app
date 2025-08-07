@@ -32,6 +32,13 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 import { Plus, Edit, Trash2, Database, RefreshCw, Search } from "lucide-react"
+import {
+  filterEditableColumns,
+  filterFormData,
+  getFieldLabel,
+  isFieldRequired,
+  type ColumnInfo,
+} from "@/lib/form-utils"
 
 // Create a QueryClient instance
 const queryClient = new QueryClient()
@@ -39,13 +46,6 @@ const queryClient = new QueryClient()
 // Types for better TypeScript support
 interface TableRecord {
   [key: string]: string | number | boolean | null | undefined
-}
-
-interface ColumnInfo {
-  name: string
-  data_type: string
-  is_nullable: boolean
-  is_identity?: boolean
 }
 
 interface SmartCRUDProps {
@@ -676,29 +676,15 @@ function SmartCRUDInner({
   })
 
   const handleCreate = (formData: FormData) => {
-    const newItem: Record<string, unknown> = {}
-    columns?.forEach((col) => {
-      if (!col.is_identity) {
-        // Skip auto-generated columns
-        const value = formData.get(col.name)
-        if (value) newItem[col.name] = value
-      }
-    })
-    createMutation.mutate(newItem)
+    const cleanData = filterFormData(formData, columns)
+    createMutation.mutate(cleanData)
   }
 
   const handleUpdate = (formData: FormData) => {
     if (!editingItem || !columns) return
 
     const primaryKey = columns.find((col) => col.is_identity) || columns[0]
-    const updates: Record<string, unknown> = {}
-
-    columns.forEach((col) => {
-      if (!col.is_identity) {
-        const value = formData.get(col.name)
-        if (value !== null) updates[col.name] = value
-      }
-    })
+    const updates = filterFormData(formData, columns)
 
     updateMutation.mutate({
       id: editingItem[primaryKey.name] as string | number,
@@ -770,63 +756,57 @@ function SmartCRUDInner({
               <DialogTitle>Create New {tableName} Record</DialogTitle>
             </DialogHeader>
             <form action={handleCreate} className="space-y-4">
-              {columns
-                ?.filter((col) => !col.is_identity)
-                .map((column) => {
-                  const getInputType = () => {
-                    if (column.data_type === "integer") return "number"
-                    if (column.data_type === "date") return "date"
-                    if (column.data_type === "timestamp with time zone")
-                      return "datetime-local"
-                    if (column.data_type === "numeric") return "number"
-                    if (column.name.includes("email")) return "email"
-                    if (
-                      column.name.includes("telephone") ||
-                      column.name.includes("phone")
-                    )
-                      return "tel"
-                    return "text"
-                  }
-
-                  return (
-                    <div key={column.name}>
-                      <Label htmlFor={column.name}>
-                        {column.name
-                          .replace(/_/g, " ")
-                          .replace(/\b\w/g, (l) => l.toUpperCase())}
-                        {!column.is_nullable && (
-                          <span className="text-red-500 ml-1">*</span>
-                        )}
-                      </Label>
-                      <Input
-                        id={column.name}
-                        name={column.name}
-                        type={getInputType()}
-                        required={!column.is_nullable}
-                        step={
-                          column.data_type === "numeric" ? "0.01" : undefined
-                        }
-                        placeholder={
-                          column.data_type === "uuid"
-                            ? "Auto-generated UUID"
-                            : column.name === "status"
-                              ? "e.g., pending, active, inactive"
-                              : column.name === "role"
-                                ? "e.g., agent, hotel_admin, regional_admin, global_admin"
-                                : column.name === "type"
-                                  ? "e.g., booking, bonus, redemption"
-                                  : `Enter ${column.name.replace(/_/g, " ")}`
-                        }
-                      />
-                      {column.data_type === "uuid" &&
-                        column.name.endsWith("_id") && (
-                          <p className="text-xs text-gray-500 mt-1">
-                            Foreign key reference - enter valid UUID
-                          </p>
-                        )}
-                    </div>
+              {filterEditableColumns(columns || []).map((column) => {
+                const getInputType = () => {
+                  if (column.data_type === "integer") return "number"
+                  if (column.data_type === "date") return "date"
+                  if (column.data_type === "timestamp with time zone")
+                    return "datetime-local"
+                  if (column.data_type === "numeric") return "number"
+                  if (column.name.includes("email")) return "email"
+                  if (
+                    column.name.includes("telephone") ||
+                    column.name.includes("phone")
                   )
-                })}
+                    return "tel"
+                  return "text"
+                }
+
+                return (
+                  <div key={column.name}>
+                    <Label htmlFor={column.name}>
+                      {getFieldLabel(column.name)}
+                      {isFieldRequired(column) && (
+                        <span className="text-red-500 ml-1">*</span>
+                      )}
+                    </Label>
+                    <Input
+                      id={column.name}
+                      name={column.name}
+                      type={getInputType()}
+                      required={isFieldRequired(column)}
+                      step={column.data_type === "numeric" ? "0.01" : undefined}
+                      placeholder={
+                        column.data_type === "uuid"
+                          ? "Auto-generated UUID"
+                          : column.name === "status"
+                            ? "e.g., pending, active, inactive"
+                            : column.name === "role"
+                              ? "e.g., agent, hotel_admin, regional_admin, global_admin"
+                              : column.name === "type"
+                                ? "e.g., booking, bonus, redemption"
+                                : `Enter ${column.name.replace(/_/g, " ")}`
+                      }
+                    />
+                    {column.data_type === "uuid" &&
+                      column.name.endsWith("_id") && (
+                        <p className="text-xs text-gray-500 mt-1">
+                          Foreign key reference - enter valid UUID
+                        </p>
+                      )}
+                  </div>
+                )
+              })}
               <Button type="submit" disabled={createMutation.isPending}>
                 {createMutation.isPending ? "Creating..." : "Create"}
               </Button>
@@ -898,9 +878,8 @@ function SmartCRUDInner({
                           </DialogHeader>
                           {editingItem && (
                             <form action={handleUpdate} className="space-y-4">
-                              {columns
-                                ?.filter((col) => !col.is_identity)
-                                .map((column) => {
+                              {filterEditableColumns(columns || []).map(
+                                (column) => {
                                   const getInputType = () => {
                                     if (column.data_type === "integer")
                                       return "number"
@@ -944,12 +923,8 @@ function SmartCRUDInner({
                                   return (
                                     <div key={column.name}>
                                       <Label htmlFor={column.name}>
-                                        {column.name
-                                          .replace(/_/g, " ")
-                                          .replace(/\b\w/g, (l) =>
-                                            l.toUpperCase()
-                                          )}
-                                        {!column.is_nullable && (
+                                        {getFieldLabel(column.name)}
+                                        {isFieldRequired(column) && (
                                           <span className="text-red-500 ml-1">
                                             *
                                           </span>
@@ -962,7 +937,7 @@ function SmartCRUDInner({
                                           editingItem[column.name]
                                         )}
                                         type={getInputType()}
-                                        required={!column.is_nullable}
+                                        required={isFieldRequired(column)}
                                         step={
                                           column.data_type === "numeric"
                                             ? "0.01"
@@ -978,7 +953,8 @@ function SmartCRUDInner({
                                         )}
                                     </div>
                                   )
-                                })}
+                                }
+                              )}
                               <Button
                                 type="submit"
                                 disabled={updateMutation.isPending}

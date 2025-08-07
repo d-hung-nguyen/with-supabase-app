@@ -27,7 +27,7 @@ export function createClient() {
       channel: () => ({
         on: () => ({ subscribe: () => ({ unsubscribe: () => {} }) }),
       }),
-    } as any
+    } as ReturnType<typeof createBrowserClient>
   }
 
   return createBrowserClient(supabaseUrl, supabaseKey)

@@ -14,16 +14,16 @@ export default function Home() {
 
           {/* Platform Kit Showcase */}
           <section className="flex flex-col gap-6">
-            <h2 className="font-medium text-2xl mb-4">
+            <h2 className="font-medium text-2xl mb-4 emerald-accent">
               🚀 Platform Kit Features
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               <Link href="/platform-kit" className="group">
-                <div className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <h3 className="font-semibold mb-2 group-hover:text-yellow-600">
+                <div className="glass-card p-4 hover:scale-105 transition-all duration-300">
+                  <h3 className="font-semibold mb-2 emerald-accent group-hover:text-primary">
                     Platform Kit Dashboard
                   </h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-muted-foreground">
                     Complete database management interface with tables, RLS, and
                     extensions.
                   </p>
@@ -31,11 +31,11 @@ export default function Home() {
               </Link>
 
               <Link href="/crud-demo" className="group">
-                <div className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <h3 className="font-semibold mb-2 group-hover:text-yellow-600">
+                <div className="glass-card p-4 hover:scale-105 transition-all duration-300">
+                  <h3 className="font-semibold mb-2 emerald-accent group-hover:text-primary">
                     CRUD Demo
                   </h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-muted-foreground">
                     Live examples of auto-generated CRUD interfaces for your
                     database tables.
                   </p>
@@ -43,11 +43,11 @@ export default function Home() {
               </Link>
 
               <Link href="/crud-comparison" className="group">
-                <div className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <h3 className="font-semibold mb-2 group-hover:text-yellow-500">
+                <div className="glass-card p-4 hover:scale-105 transition-all duration-300">
+                  <h3 className="font-semibold mb-2 emerald-accent group-hover:text-primary">
                     Before vs After
                   </h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-muted-foreground">
                     See how Platform Kit reduces 630+ lines of code to just 3
                     lines.
                   </p>
@@ -55,24 +55,24 @@ export default function Home() {
               </Link>
 
               <Link href="/test-platform" className="group">
-                <div className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <h3 className="font-semibold mb-2 group-hover:text-yellow-500">
+                <div className="glass-card p-4 hover:scale-105 transition-all duration-300">
+                  <h3 className="font-semibold mb-2 emerald-accent group-hover:text-primary">
                     Test Platform
                   </h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-muted-foreground">
                     Test and debug Platform Kit functions with your database.
                   </p>
                 </div>
               </Link>
             </div>
 
-            <div className="bg-gradient-to-r from-[#FFD700]/5 to-[#FFD700]/5 border border-[#FFD700]/20 rounded-lg p-6">
-              <h3 className="font-semibold text-lg mb-4 text-[#FFD700]">
+            <div className="glass-card p-6 emerald-glow">
+              <h3 className="font-semibold text-lg mb-4 emerald-accent">
                 🎉 What Platform Kit gives you:
               </h3>
               <div className="grid md:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <ul className="space-y-1">
+                  <ul className="space-y-1 text-foreground">
                     <li>✅ Auto-generated CRUD interfaces</li>
                     <li>✅ Schema-aware forms</li>
                     <li>✅ Built-in search & pagination</li>
@@ -80,7 +80,7 @@ export default function Home() {
                   </ul>
                 </div>
                 <div>
-                  <ul className="space-y-1">
+                  <ul className="space-y-1 text-foreground">
                     <li>✅ Real-time monitoring</li>
                     <li>✅ Extension management</li>
                     <li>✅ 99% less code to write</li>
@@ -91,22 +91,22 @@ export default function Home() {
             </div>
 
             {/* Database Tables Overview */}
-            <div className="bg-gradient-to-r from-[#FFD700]/5 to-[#FFD700]/5 border border-[#FFD700]/20 rounded-lg p-6">
-              <h3 className="font-semibold text-lg mb-4 text-[#FFD700]">
+            <div className="glass-card p-6">
+              <h3 className="font-semibold text-lg mb-4 emerald-accent">
                 📊 Your Incentive Program Database Tables:
               </h3>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
                 {/* Core Business Tables */}
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-[#FFD700] text-base">
+                  <h4 className="font-semibold emerald-accent text-base">
                     Core Business
                   </h4>
 
-                  <div className="bg-white/50 p-3 rounded border">
-                    <div className="font-medium text-[#FFD700] mb-1">
+                  <div className="glass-card p-3">
+                    <div className="font-medium emerald-accent mb-1">
                       agencies
                     </div>
-                    <div className="text-xs text-gray-600 space-y-0.5">
+                    <div className="text-xs text-muted-foreground space-y-0.5">
                       <div>• id, name, region_id</div>
                       <div>• status, address, city</div>
                       <div>• zip_code, country</div>
@@ -114,11 +114,11 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="bg-white/50 p-3 rounded border">
-                    <div className="font-medium text-[#FFD700] mb-1">
+                  <div className="glass-card p-3">
+                    <div className="font-medium emerald-accent mb-1">
                       agents
                     </div>
-                    <div className="text-xs text-gray-600 space-y-0.5">
+                    <div className="text-xs text-muted-foreground space-y-0.5">
                       <div>• id, email, role</div>
                       <div>• first_name, last_name</div>
                       <div>• agency_id, telephone</div>
@@ -126,11 +126,11 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="bg-white/50 p-3 rounded border">
-                    <div className="font-medium text-[#FFD700] mb-1">
+                  <div className="glass-card p-3">
+                    <div className="font-medium emerald-accent mb-1">
                       hotels
                     </div>
-                    <div className="text-xs text-gray-600 space-y-0.5">
+                    <div className="text-xs text-muted-foreground space-y-0.5">
                       <div>• id, name, location</div>
                       <div>• region_id, status</div>
                       <div>• created_at, updated_at</div>
@@ -140,15 +140,15 @@ export default function Home() {
 
                 {/* Incentive Program Tables */}
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-[#FFD700] text-base">
+                  <h4 className="font-semibold emerald-accent text-base">
                     Incentive Program
                   </h4>
 
-                  <div className="bg-white/50 p-3 rounded border">
-                    <div className="font-medium text-[#FFD700] mb-1">
+                  <div className="glass-card p-3">
+                    <div className="font-medium emerald-accent mb-1">
                       bookings
                     </div>
-                    <div className="text-xs text-gray-600 space-y-0.5">
+                    <div className="text-xs text-muted-foreground space-y-0.5">
                       <div>• id, agent_id, hotel_id</div>
                       <div>• confirmation_number</div>
                       <div>• guest_name, arrival_date</div>
@@ -157,22 +157,22 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="bg-white/50 p-3 rounded border">
-                    <div className="font-medium text-[#FFD700] mb-1">
+                  <div className="glass-card p-3">
+                    <div className="font-medium emerald-accent mb-1">
                       points_ledger
                     </div>
-                    <div className="text-xs text-gray-600 space-y-0.5">
+                    <div className="text-xs text-muted-foreground space-y-0.5">
                       <div>• id, user_id, booking_id</div>
                       <div>• points, type, notes</div>
                       <div>• created_at</div>
                     </div>
                   </div>
 
-                  <div className="bg-white/50 p-3 rounded border">
-                    <div className="font-medium text-[#FFD700] mb-1">
+                  <div className="glass-card p-3">
+                    <div className="font-medium emerald-accent mb-1">
                       campaign
                     </div>
-                    <div className="text-xs text-gray-600 space-y-0.5">
+                    <div className="text-xs text-muted-foreground space-y-0.5">
                       <div>• id, name, description</div>
                       <div>• start_date, end_date</div>
                       <div>• bonus_multiplier</div>
@@ -183,15 +183,15 @@ export default function Home() {
 
                 {/* Supporting Tables */}
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-[#FFD700] text-base">
+                  <h4 className="font-semibold emerald-accent text-base">
                     Supporting Data
                   </h4>
 
-                  <div className="bg-white/50 p-3 rounded border">
-                    <div className="font-medium text-[#FFD700] mb-1">
+                  <div className="glass-card p-3">
+                    <div className="font-medium emerald-accent mb-1">
                       rewards
                     </div>
-                    <div className="text-xs text-gray-600 space-y-0.5">
+                    <div className="text-xs text-muted-foreground space-y-0.5">
                       <div>• id, user_id</div>
                       <div>• points_redeemed</div>
                       <div>• voucher_code, vendor</div>
@@ -199,21 +199,21 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="bg-white/50 p-3 rounded border">
-                    <div className="font-medium text-[#FFD700] mb-1">
+                  <div className="glass-card p-3">
+                    <div className="font-medium emerald-accent mb-1">
                       regions
                     </div>
-                    <div className="text-xs text-gray-600 space-y-0.5">
+                    <div className="text-xs text-muted-foreground space-y-0.5">
                       <div>• id, name</div>
                       <div>• created_at, updated_at</div>
                     </div>
                   </div>
 
-                  <div className="bg-white/50 p-3 rounded border">
-                    <div className="font-medium text-[#FFD700] mb-1">
+                  <div className="glass-card p-3">
+                    <div className="font-medium emerald-accent mb-1">
                       room_types
                     </div>
-                    <div className="text-xs text-gray-600 space-y-0.5">
+                    <div className="text-xs text-muted-foreground space-y-0.5">
                       <div>• id, hotel_id</div>
                       <div>• type_name</div>
                     </div>

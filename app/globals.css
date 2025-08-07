@@ -4,57 +4,60 @@
 
 @layer base {
   :root {
+    /* Light theme - bright green tones */
     --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --foreground: 150 25% 15%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 150 25% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 51 91% 50%; /* Yellow-600 */
-    --primary-foreground: 0 0% 98%;
-    --secondary: 43 96% 56%; /* Gold from logo (#FFD700) */
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 45 93% 58%; /* Yellow-500 shade */
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 45 93% 58%; /* Yellow ring */
-    --chart-1: 45 93% 58%; /* Yellow-500 */
-    --chart-2: 48 96% 53%; /* Yellow-400 */
-    --chart-3: 43 96% 56%; /* Amber-500/Gold */
-    --chart-4: 51 91% 50%; /* Yellow-600 */
-    --chart-5: 45 100% 51%; /* Golden yellow */
-    --radius: 0.5rem;
+    --popover-foreground: 150 25% 15%;
+    --primary: 150 80% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 150 20% 90%;
+    --secondary-foreground: 150 25% 15%;
+    --muted: 150 10% 95%;
+    --muted-foreground: 150 15% 40%;
+    --accent: 150 60% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 150 20% 85%;
+    --input: 150 10% 95%;
+    --ring: 150 80% 45%;
+    --chart-1: 150 70% 45%;
+    --chart-2: 140 60% 40%;
+    --chart-3: 160 55% 35%;
+    --chart-4: 170 65% 30%;
+    --chart-5: 130 75% 40%;
+    --radius: 0.75rem;
   }
+
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 45 93% 58%; /* Yellow ring */
-    --chart-1: 45 93% 58%; /* Yellow-500 */
-    --chart-2: 48 96% 53%; /* Yellow-400 */
-    --chart-3: 43 96% 56%; /* Amber-500/Gold */
-    --chart-4: 51 91% 50%; /* Yellow-600 */
-    --chart-5: 45 100% 51%; /* Golden yellow */
+    /* Dark theme - deep green tones */
+    --background: 150 40% 8%;
+    --foreground: 150 15% 92%;
+    --card: 150 35% 12%;
+    --card-foreground: 150 15% 92%;
+    --popover: 150 35% 12%;
+    --popover-foreground: 150 15% 92%;
+    --primary: 150 80% 45%;
+    --primary-foreground: 150 20% 5%;
+    --secondary: 150 25% 18%;
+    --secondary-foreground: 150 15% 88%;
+    --muted: 150 20% 22%;
+    --muted-foreground: 150 10% 65%;
+    --accent: 150 70% 50%;
+    --accent-foreground: 150 20% 8%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 150 15% 92%;
+    --border: 150 25% 20%;
+    --input: 150 20% 18%;
+    --ring: 150 80% 50%;
+    --chart-1: 150 70% 50%;
+    --chart-2: 140 60% 45%;
+    --chart-3: 160 55% 40%;
+    --chart-4: 170 65% 35%;
+    --chart-5: 130 75% 45%;
   }
 }
 
@@ -62,7 +65,414 @@
   * {
     @apply border-border;
   }
+
+  html {
+    /* Remove the forced dark mode to respect system/user preference */
+  }
+
   body {
     @apply bg-background text-foreground;
+    min-height: 100vh;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
+
+  /* Light mode background - Atlas style */
+  body:not(.dark) {
+    background-color: #f9fbfa;
+    background-attachment: fixed;
+  }
+
+  /* Dark mode background - Atlas style */
+  .dark body {
+    background-color: #0f172a;
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  /* MongoDB Atlas-inspired styling */
+  .leafygreen-nav-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0px 16px;
+    box-sizing: border-box;
+    font-size: 13px;
+    line-height: 15px;
+    background-color: rgb(255, 255, 255);
+    height: 45px;
+    z-index: 0;
+    box-shadow: rgba(0, 30, 43, 0.1) 0px 4px 4px 0px;
+    border-bottom: 1px solid #e8edeb;
+  }
+
+  .dark .leafygreen-nav-header {
+    background-color: rgb(30, 41, 59);
+    border-bottom: 1px solid #374151;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  }
+
+  .atlas-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    background-color: #f9fbfa;
+    min-height: calc(100vh - 45px);
+  }
+
+  .dark .atlas-container {
+    background-color: #1e293b;
+  }
+
+  .atlas-header-section {
+    background-color: white;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    border: 1px solid #e8edeb;
+    box-shadow: rgba(0, 30, 43, 0.05) 0px 2px 4px 0px;
+  }
+
+  .dark .atlas-header-section {
+    background-color: rgb(30, 41, 59);
+    border: 1px solid #374151;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+  }
+
+  .atlas-content-section {
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #e8edeb;
+    overflow: hidden;
+    box-shadow: rgba(0, 30, 43, 0.05) 0px 2px 4px 0px;
+  }
+
+  .dark .atlas-content-section {
+    background-color: rgb(30, 41, 59);
+    border: 1px solid #374151;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+  }
+
+  .atlas-page-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    color: #001e2b;
+    margin-bottom: 8px;
+    font-family:
+      "Euclid Circular A", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .dark .atlas-page-title {
+    color: #f1f5f9;
+  }
+
+  .atlas-page-description {
+    font-size: 14px;
+    line-height: 20px;
+    color: #5c6c75;
+    margin-bottom: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .dark .atlas-page-description {
+    color: #94a3b8;
+  }
+
+  .atlas-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    background-color: #f9fbfa;
+    border: 1px solid #e8edeb;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .dark .atlas-badge {
+    background-color: #334155;
+    border: 1px solid #475569;
+  }
+
+  .atlas-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background-color: #f9fbfa;
+    border: 1px solid #e8edeb;
+    border-radius: 6px;
+  }
+
+  .dark .atlas-status-indicator {
+    background-color: #334155;
+    border: 1px solid #475569;
+  }
+
+  .atlas-status-online {
+    background-color: #e3fcf7;
+    border-color: #c0fae6;
+  }
+
+  .dark .atlas-status-online {
+    background-color: rgba(5, 150, 105, 0.1);
+    border-color: rgba(34, 197, 94, 0.2);
+  }
+
+  /* Glass components with Atlas styling */
+  .glass-card {
+    @apply relative overflow-hidden;
+    background-color: white;
+    border: 1px solid #e8edeb;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: rgba(0, 30, 43, 0.05) 0px 2px 4px 0px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .dark .glass-card {
+    background-color: rgb(30, 41, 59);
+    border: 1px solid #374151;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+  }
+
+  .glass-card::before {
+    display: none; /* Remove glass effect overlay for cleaner Atlas look */
+  }
+
+  .glass-button {
+    @apply relative overflow-hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #00684a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .glass-button:hover {
+    background-color: #00593f;
+    transform: translateY(-1px);
+    box-shadow: rgba(0, 30, 43, 0.2) 0px 4px 8px 0px;
+  }
+
+  .glass-button:active {
+    transform: translateY(0);
+    box-shadow: rgba(0, 30, 43, 0.1) 0px 2px 4px 0px;
+  }
+
+  .glass-input {
+    @apply border-0;
+    width: 100%;
+    padding: 8px 12px;
+    background-color: white;
+    border: 1px solid #c1c7c6;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #001e2b;
+    transition: all 0.2s ease;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .dark .glass-input {
+    background-color: #334155;
+    border: 1px solid #475569;
+    color: #f1f5f9;
+  }
+
+  .glass-input::placeholder {
+    color: #889397;
+  }
+
+  .dark .glass-input::placeholder {
+    color: #64748b;
+  }
+
+  .glass-input:focus {
+    background-color: white;
+    border-color: #00684a;
+    box-shadow: 0 0 0 2px rgba(0, 104, 74, 0.2);
+    outline: none;
+  }
+
+  .dark .glass-input:focus {
+    background-color: #334155;
+    border-color: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+  }
+
+  .emerald-accent {
+    color: #00684a;
+    font-weight: 600;
+  }
+
+  .dark .emerald-accent {
+    color: #10b981;
+  }
+
+  .emerald-bg {
+    background-color: #e3fcf7;
+    border: 1px solid #c0fae6;
+  }
+
+  .dark .emerald-bg {
+    background-color: rgba(5, 150, 105, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+  }
+
+  .glass-modal {
+    @apply border;
+    background-color: white;
+    border: 1px solid #e8edeb;
+    border-radius: 8px;
+    box-shadow: rgba(0, 30, 43, 0.6) 0px 8px 32px 0px;
+  }
+
+  .dark .glass-modal {
+    background-color: rgb(30, 41, 59);
+    border: 1px solid #374151;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 8px 32px 0px;
+  }
+}
+
+.scrollable-card {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 197, 94, 0.4) transparent;
+}
+
+.dark .scrollable-card {
+  scrollbar-color: rgba(34, 197, 94, 0.3) transparent;
+}
+
+.scrollable-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollable-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollable-card::-webkit-scrollbar-thumb {
+  background: rgba(34, 197, 94, 0.4);
+  border-radius: 3px;
+}
+
+.dark .scrollable-card::-webkit-scrollbar-thumb {
+  background: rgba(34, 197, 94, 0.3);
+}
+
+.scrollable-card::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 197, 94, 0.6);
+}
+
+.dark .scrollable-card::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 197, 94, 0.5);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 300ms ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #00684a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.button:hover {
+  background-color: #00593f;
+  transform: translateY(-1px);
+  box-shadow: rgba(0, 30, 43, 0.2) 0px 4px 8px 0px;
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: rgba(0, 30, 43, 0.1) 0px 2px 4px 0px;
+}
+
+.dark .button {
+  background-color: #10b981;
+  color: #0f172a;
+}
+
+.dark .button:hover {
+  background-color: #059669;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px 0px;
+}
+
+/* Custom animations for the green theme */
+@keyframes emerald-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(34, 197, 94, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.7);
+  }
+}
+
+/* Removed invalid .dark @keyframes emerald-glow block */
+
+.emerald-glow {
+  animation: emerald-glow 2s ease-in-out infinite;
+}
+
+/* Override any remaining light theme elements */
+* {
+  scrollbar-color: rgba(34, 197, 94, 0.4) transparent;
+}
+
+.dark * {
+  scrollbar-color: rgba(34, 197, 94, 0.3) transparent;
+}
+
+/* Additional container styles for Atlas layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* Hide scrollbars for horizontal navigation */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
