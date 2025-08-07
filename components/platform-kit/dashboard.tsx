@@ -2,7 +2,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { Activity, Database, Edit, Puzzle, Shield } from "lucide-react"
+import { Activity, Database, Puzzle, Shield } from "lucide-react"
 import { DataManager } from "./data-manager"
 import { DatabaseTables } from "./database-tables"
 import { ExtensionsManager } from "./extensions-manager"
@@ -35,7 +35,7 @@ export function SupabasePlatformDashboard() {
         <Tabs defaultValue="data" className="space-y-6">
           <TabsList className="grid grid-cols-5 w-full max-w-3xl">
             <TabsTrigger value="data" className="flex items-center gap-2">
-              <Edit className="h-4 w-4" />
+              <Database className="h-4 w-4" />
               Data Manager
             </TabsTrigger>
             <TabsTrigger value="tables" className="flex items-center gap-2">

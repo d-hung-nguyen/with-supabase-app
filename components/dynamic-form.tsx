@@ -348,7 +348,7 @@ export function DynamicForm<T extends z.ZodRawShape = z.ZodRawShape>({
                   : undefined
               return (
                 <FormItem className="py-6 border-b">
-                  <div className="w-full flex flex-col lg:flex-row lg:items-center justify-between w-full gap-4 lg:gap-8">
+                  <div className="w-full flex flex-col lg:flex-row lg:items-center justify-between  gap-4 lg:gap-8">
                     <div className="flex-1 pr-4">
                       <FormLabel>{label}</FormLabel>
                       <div className="text-sm text-muted-foreground">
